@@ -7,19 +7,23 @@ import datetime
 rooms = [
 		{
 			'room_number':'B509',
-			'led':12
+			'light':21,
+			'ac':17
 		},
 		{
 			'room_number':'B512',
-			'led':13
+			'light':20,
+			'ac':16
 		},
 		{
 			'room_number':'B516',
-			'led':16
+			'light':19,
+			'ac': 13
 		},
 		{
 			'room_number':'B517',
-			'led':17
+			'light':18,
+			'ac':12
 		}
 ]
 
@@ -56,6 +60,10 @@ if __name__ == "__main__":
 	GPIO.setup(13,GPIO.OUT)
 	GPIO.setup(16,GPIO.OUT)
 	GPIO.setup(17,GPIO.OUT)
+	GPIO.setup(18,GPIO.OUT)
+	GPIO.setup(19,GPIO.OUT)
+	GPIO.setup(20,GPIO.OUT)
+	GPIO.setup(21,GPIO.OUT)
 
 	file_name = "report_%s.csv" % datetime.datetime.strftime(datetime.datetime.now(), '%Y%m%d%H%M%S')
 	file = open(file_name, "a")
@@ -71,12 +79,12 @@ if __name__ == "__main__":
 			for room in rooms:
 			    is_occupant_in = occupant_in(hour)
                             light_on = is_dark(hour) and is_occupant_in
-			    atleast_one_occupant += is_occupant_in 
+			    atleast_one_occupant = atleast_one_occupant or is_occupant_in 
 			    if light_on:
-			    	GPIO.output(room['led'],GPIO.HIGH)
+			    	GPIO.output(room['light'],GPIO.HIGH)
 			    else:
-			    	GPIO.output(room['led'],GPIO.LOW)
-			    if atleast_one_occupant:
+			    	GPIO.output(room['light'],GPIO.LOW)
+			    if atleast_one_occupant and is_dark(hour):
 			    	GPIO.output(6,GPIO.HIGH)
 			    else:
 			    	GPIO.output(6,GPIO.LOW)
