@@ -33,7 +33,7 @@ shared_space = ['corridor', 'washrooms']
 #random probabilities in %
 P_WORK_DAYTIME = 80
 P_WORK_IN_EVENING = 50
-P_WORK_AT_NIGHT = 10
+P_WORK_AT_NIGHT = 5 
 P_FORGET_SWITCH_OFF_OFFICE_LIGHT = 5
 P_FORGET_SWITCH_OFF_CORRIDOR_LIGHT = 50
 
